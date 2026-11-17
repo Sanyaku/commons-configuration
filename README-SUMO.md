@@ -1,11 +1,11 @@
 # Sumo fork of commons-configuration 1.x
 
-Branch `sumo`, based on upstream tag `CONFIGURATION_1_10`. Published to Artifactory `sumo-release-local`.
+Branch `sumo`, based on upstream tag `CONFIGURATION_1_10`. Each release is a tag on `sumo`.
 
-| version | change |
-|---|---|
-| `1.10-Sumo` | pom drops optional `log4j`; classes identical to upstream 1.10 |
-| `1.11-Sumo` | `commons-lang` 2.6 -> `commons-lang3`; lang 2.6 `text.Str*` vendored in `org.apache.commons.configuration.vendor.lang.text`; Java 17 |
+| version | Artifactory | change |
+|---|---|---|
+| `1.10-Sumo` | `libs-release-local` (hand upload) | pom drops optional `log4j`; classes identical to upstream 1.10 |
+| `1.11-Sumo` | `sumo-release-local` | `commons-lang` 2.6 -> `commons-lang3`; lang 2.6 `text.Str*` vendored in `org.apache.commons.configuration.vendor.lang.text`; Java 17 |
 
 ## Publish
 
