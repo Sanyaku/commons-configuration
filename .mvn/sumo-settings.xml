@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Publish to Sumo Artifactory; see README-SUMO.md. Token comes from the environment, never this file. -->
+<settings>
+  <servers>
+    <server>
+      <id>sumo-artifactory</id>
+      <configuration>
+        <httpHeaders>
+          <property>
+            <name>Authorization</name>
+            <value>Bearer ${env.ARTIFACTORY_PASSWORD}</value>
+          </property>
+        </httpHeaders>
+      </configuration>
+    </server>
+  </servers>
+</settings>
