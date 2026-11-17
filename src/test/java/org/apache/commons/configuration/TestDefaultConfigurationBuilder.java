@@ -43,8 +43,9 @@ import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
 import org.apache.commons.configuration.tree.ConfigurationNode;
 import org.apache.commons.configuration.tree.DefaultConfigurationNode;
 import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
-import org.apache.commons.lang.SystemUtils;
-import org.apache.commons.lang.text.StrLookup;
+import org.apache.commons.lang3.JavaVersion;
+import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.configuration.vendor.lang.text.StrLookup;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.Log4JLogger;
@@ -1171,7 +1172,7 @@ public class TestDefaultConfigurationBuilder
     @Test
     public void testExpression() throws Exception
     {
-        if (SystemUtils.isJavaVersionAtLeast(150))
+        if (SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_5))
         {
             factory.setFile(EXPRESSION_FILE);
             factory.setAttributeSplittingDisabled(true);

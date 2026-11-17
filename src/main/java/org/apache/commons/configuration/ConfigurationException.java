@@ -17,8 +17,6 @@
 
 package org.apache.commons.configuration;
 
-import org.apache.commons.lang.exception.NestableException;
-
 /**
  * Any exception that occurs while initializing a Configuration
  * object.
@@ -26,7 +24,7 @@ import org.apache.commons.lang.exception.NestableException;
  * @author Eric Pugh
  * @version $Id$
  */
-public class ConfigurationException extends NestableException
+public class ConfigurationException extends Exception
 {
     /**
      * The serial version ID.
@@ -74,5 +72,18 @@ public class ConfigurationException extends NestableException
     public ConfigurationException(String message, Throwable cause)
     {
         super(message, cause);
+    }
+
+    /**
+     * Returns the detail message or, as commons-lang 2 {@code Nestable*} did,
+     * the cause's {@code toString()} if there is no message.
+     *
+     * @return the message
+     */
+    @Override
+    public String getMessage()
+    {
+        String msg = super.getMessage();
+        return msg == null && getCause() != null ? getCause().toString() : msg;
     }
 }

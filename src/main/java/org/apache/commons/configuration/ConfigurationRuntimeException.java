@@ -17,8 +17,6 @@
 
 package org.apache.commons.configuration;
 
-import org.apache.commons.lang.exception.NestableRuntimeException;
-
 /**
  * A configuration related runtime exception.
  *
@@ -27,7 +25,7 @@ import org.apache.commons.lang.exception.NestableRuntimeException;
  * @author Emmanuel Bourg
  * @version $Id$
  */
-public class ConfigurationRuntimeException extends NestableRuntimeException
+public class ConfigurationRuntimeException extends RuntimeException
 {
     /**
      * The serial version ID.
@@ -75,5 +73,18 @@ public class ConfigurationRuntimeException extends NestableRuntimeException
     public ConfigurationRuntimeException(String message, Throwable cause)
     {
         super(message, cause);
+    }
+
+    /**
+     * Returns the detail message or, as commons-lang 2 {@code Nestable*} did,
+     * the cause's {@code toString()} if there is no message.
+     *
+     * @return the message
+     */
+    @Override
+    public String getMessage()
+    {
+        String msg = super.getMessage();
+        return msg == null && getCause() != null ? getCause().toString() : msg;
     }
 }

@@ -36,7 +36,7 @@ import org.apache.commons.configuration.interpol.ConfigurationInterpolator;
 import org.apache.commons.configuration.reloading.FileAlwaysReloadingStrategy;
 import org.apache.commons.configuration.tree.ConfigurationNode;
 import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
-import org.apache.commons.lang.text.StrLookup;
+import org.apache.commons.configuration.vendor.lang.text.StrLookup;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
