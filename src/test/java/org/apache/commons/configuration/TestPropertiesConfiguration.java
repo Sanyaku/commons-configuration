@@ -51,7 +51,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.JavaVersion;
+import org.apache.commons.lang3.SystemUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -852,7 +853,7 @@ public class TestPropertiesConfiguration
     @Test
     public void testFileWithSharpSymbol() throws Exception
     {
-        if (SystemUtils.isJavaVersionAtLeast(1.4f))
+        if (SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_4))
         {
             File file = new File("target/sharp#1.properties");
             file.createNewFile();

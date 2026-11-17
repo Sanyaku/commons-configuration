@@ -27,13 +27,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-configuration</groupId>
   <artifactId>commons-configuration</artifactId>
-  <version>1.10-Sumo</version>
+  <version>1.11-Sumo</version>
   <name>Apache Commons Configuration</name>
 
   <inceptionYear>2001</inceptionYear>
   <description>Tools to assist in the reading of configuration/preferences files in various formats.</description>
 
-  <url>http://commons.apache.org/configuration/</url>
+  <url>https://github.com/Sanyaku/commons-configuration</url>
 
   <issueManagement>
     <system>jira</system>
@@ -41,9 +41,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/configuration/tags/CONFIGURATION_1_10RC2</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/configuration/tags/CONFIGURATION_1_10RC2</developerConnection>
-    <url>http://svn.apache.org/viewvc/commons/proper/configuration/tags/CONFIGURATION_1_10RC2</url>
+    <connection>scm:git:https://github.com/Sanyaku/commons-configuration.git</connection>
+    <developerConnection>scm:git:git@github.com:Sanyaku/commons-configuration.git</developerConnection>
+    <url>https://github.com/Sanyaku/commons-configuration</url>
   </scm>
 
   <distributionManagement>
@@ -209,15 +209,15 @@
     </dependency>
 
     <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-      <version>2.6</version>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.22.0</version>
     </dependency>
 
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
-      <version>1.1.1</version>
+      <version>1.4.0</version>
       <exclusions>
         <exclusion>
           <groupId>logkit</groupId>
@@ -395,21 +395,21 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.5.6</version>
+      <version>1.7.36</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-ext</artifactId>
-      <version>1.5.6</version>
+      <version>1.7.36</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
-      <version>1.5.6</version>
+      <version>1.7.36</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -419,8 +419,8 @@
     <commons.release.version>1.10</commons.release.version>
     <commons.rc.version>RC1</commons.rc.version>
     <commons.jira.id>CONFIGURATION</commons.jira.id>
-    <maven.compiler.source>1.5</maven.compiler.source>
-    <maven.compiler.target>1.5</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
 
     <!-- Explicitly declare optional dependencies for the OSGi manifest. -->
     <commons.osgi.import>
@@ -482,6 +482,7 @@
           </excludes>
           <systemPropertyVariables>
             <java.awt.headless>true</java.awt.headless>
+            <org.apache.commons.logging.LogFactory>org.apache.commons.logging.impl.LogFactoryImpl</org.apache.commons.logging.LogFactory>
             <org.apache.commons.logging.Log>org.apache.commons.configuration.Logging</org.apache.commons.logging.Log>
           </systemPropertyVariables>
         </configuration>

@@ -33,11 +33,10 @@ import org.apache.commons.configuration.event.ConfigurationErrorEvent;
 import org.apache.commons.configuration.event.ConfigurationErrorListener;
 import org.apache.commons.configuration.event.EventSource;
 import org.apache.commons.configuration.interpol.ConfigurationInterpolator;
-import org.apache.commons.lang.BooleanUtils;
-import org.apache.commons.lang.ClassUtils;
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.text.StrLookup;
-import org.apache.commons.lang.text.StrSubstitutor;
+import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.configuration.vendor.lang.text.StrLookup;
+import org.apache.commons.configuration.vendor.lang.text.StrSubstitutor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.impl.NoOpLog;
 
@@ -651,7 +650,7 @@ public abstract class AbstractConfiguration extends EventSource implements Confi
      */
     public boolean getBoolean(String key, boolean defaultValue)
     {
-        return getBoolean(key, BooleanUtils.toBooleanObject(defaultValue)).booleanValue();
+        return getBoolean(key, Boolean.valueOf(defaultValue)).booleanValue();
     }
 
     /**
@@ -1089,7 +1088,7 @@ public abstract class AbstractConfiguration extends EventSource implements Confi
 
             for (int i = 0; i < array.length; i++)
             {
-                array[i] = interpolate(ObjectUtils.toString(list.get(i), null));
+                array[i] = interpolate(ObjectUtils.toString(list.get(i), (String) null));
             }
         }
         else if (value == null)

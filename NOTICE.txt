@@ -3,3 +3,6 @@ Copyright 2001-2013 The Apache Software Foundation
 
 This product includes software developed at
 The Apache Software Foundation (http://www.apache.org/).
+
+The classes in org.apache.commons.configuration.vendor.lang.text were copied from
+Apache Commons Lang 2.6 (org.apache.commons.lang.text).

@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.text.StrLookup;
+import org.apache.commons.configuration.vendor.lang.text.StrLookup;
 
 /**
  * <p>

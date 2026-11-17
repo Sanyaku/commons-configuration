@@ -47,8 +47,10 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.MapConfiguration;
 import org.apache.commons.configuration.tree.ConfigurationNode;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.text.translate.CharSequenceTranslator;
+import org.apache.commons.lang3.text.translate.NumericEntityEscaper;
+import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
@@ -123,6 +125,10 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class XMLPropertyListConfiguration extends AbstractHierarchicalFileConfiguration
 {
+    /** lang2 escapeXml semantics: also escape non-ASCII as numeric entities. */
+    private static final CharSequenceTranslator ESCAPE_XML =
+            StringEscapeUtils.ESCAPE_XML.with(NumericEntityEscaper.above(0x7f));
+
     /**
      * The serial version UID.
      */
@@ -295,7 +301,7 @@ public class XMLPropertyListConfiguration extends AbstractHierarchicalFileConfig
 
         if (node.getName() != null)
         {
-            out.println(padding + "<key>" + StringEscapeUtils.escapeXml(node.getName()) + "</key>");
+            out.println(padding + "<key>" + ESCAPE_XML.translate(node.getName()) + "</key>");
         }
 
         List<ConfigurationNode> children = node.getChildren();
@@ -415,11 +421,11 @@ public class XMLPropertyListConfiguration extends AbstractHierarchicalFileConfig
         else if (value instanceof byte[])
         {
             String base64 = new String(Base64.encodeBase64((byte[]) value));
-            out.println(padding + "<data>" + StringEscapeUtils.escapeXml(base64) + "</data>");
+            out.println(padding + "<data>" + ESCAPE_XML.translate(base64) + "</data>");
         }
         else if (value != null)
         {
-            out.println(padding + "<string>" + StringEscapeUtils.escapeXml(String.valueOf(value)) + "</string>");
+            out.println(padding + "<string>" + ESCAPE_XML.translate(String.valueOf(value)) + "</string>");
         }
         else
         {

@@ -38,8 +38,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang.BooleanUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * A utility class to convert the configuration properties into any type.
@@ -184,7 +184,7 @@ public final class PropertyConverter
 
     /**
      * Convert the specified object into a Boolean. Internally the
-     * {@code org.apache.commons.lang.BooleanUtils} class from the
+     * {@code org.apache.commons.lang3.BooleanUtils} class from the
      * <a href="http://commons.apache.org/lang/">Commons Lang</a>
      * project is used to perform this conversion. This class accepts some more
      * tokens for the boolean value of <b>true</b>, e.g. {@code yes} and
@@ -203,7 +203,9 @@ public final class PropertyConverter
         }
         else if (value instanceof String)
         {
-            Boolean b = BooleanUtils.toBooleanObject((String) value);
+            String s = (String) value;
+            // lang3 also accepts "1"/"0"; keep lang2 semantics
+            Boolean b = "1".equals(s) || "0".equals(s) ? null : BooleanUtils.toBooleanObject(s);
             if (b == null)
             {
                 throw new ConversionException("The value " + value + " can't be converted to a Boolean object");

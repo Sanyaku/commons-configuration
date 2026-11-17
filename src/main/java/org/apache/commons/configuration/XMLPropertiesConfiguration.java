@@ -28,8 +28,10 @@ import java.util.List;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.text.translate.CharSequenceTranslator;
+import org.apache.commons.lang3.text.translate.NumericEntityEscaper;
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -72,6 +74,10 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class XMLPropertiesConfiguration extends PropertiesConfiguration
 {
+    /** lang2 escapeXml semantics: also escape non-ASCII as numeric entities. */
+    private static final CharSequenceTranslator ESCAPE_XML =
+            StringEscapeUtils.ESCAPE_XML.with(NumericEntityEscaper.above(0x7f));
+
     /**
      * The default encoding (UTF-8 as specified by http://java.sun.com/j2se/1.5.0/docs/api/java/util/Properties.html)
      */
@@ -231,7 +237,7 @@ public class XMLPropertiesConfiguration extends PropertiesConfiguration
 
         if (getHeader() != null)
         {
-            writer.println("  <comment>" + StringEscapeUtils.escapeXml(getHeader()) + "</comment>");
+            writer.println("  <comment>" + ESCAPE_XML.translate(getHeader()) + "</comment>");
         }
 
         Iterator<String> keys = getKeys();
@@ -264,12 +270,12 @@ public class XMLPropertiesConfiguration extends PropertiesConfiguration
     private void writeProperty(PrintWriter out, String key, Object value)
     {
         // escape the key
-        String k = StringEscapeUtils.escapeXml(key);
+        String k = ESCAPE_XML.translate(key);
 
         if (value != null)
         {
             // escape the value
-            String v = StringEscapeUtils.escapeXml(String.valueOf(value));
+            String v = ESCAPE_XML.translate(String.valueOf(value));
             v = StringUtils.replace(v, String.valueOf(getListDelimiter()), "\\" + getListDelimiter());
 
             out.println("  <entry key=\"" + k + "\">" + v + "</entry>");
@@ -310,7 +316,7 @@ public class XMLPropertiesConfiguration extends PropertiesConfiguration
         {
             Element comment = document.createElement("comment");
             properties.appendChild(comment);
-            comment.setTextContent(StringEscapeUtils.escapeXml(getHeader()));
+            comment.setTextContent(ESCAPE_XML.translate(getHeader()));
         }
 
         Iterator<String> keys = getKeys();
@@ -336,13 +342,13 @@ public class XMLPropertiesConfiguration extends PropertiesConfiguration
         properties.appendChild(entry);
 
         // escape the key
-        String k = StringEscapeUtils.escapeXml(key);
+        String k = ESCAPE_XML.translate(key);
         entry.setAttribute("key", k);
 
         if (value != null)
         {
             // escape the value
-            String v = StringEscapeUtils.escapeXml(String.valueOf(value));
+            String v = ESCAPE_XML.translate(String.valueOf(value));
             v = StringUtils.replace(v, String.valueOf(getListDelimiter()), "\\" + getListDelimiter());
             entry.setTextContent(v);
         }
